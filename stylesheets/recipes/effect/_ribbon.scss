@@ -55,15 +55,15 @@
 
     @if ($skin == 'classic')
     {
-        @extend %effect-ribbon-skin-classic;
+        @extend .effect-ribbon-skin-classic;
         // skin border size to remove;
         $width-add: .1em;
         $height-add: .1em;
     }
-    //@elseif ($skin == 'github')
-    //{
-    //    @extend %effect-ribbon-skin-github;
-    //}
+    @elseif ($skin == 'blue')
+    {
+        @extend %effect-ribbon-skin-blue;
+    }
 
     // here is the awesome trick !
     $value: pow($width + $width-add, 2) / 2 ;
@@ -74,7 +74,7 @@
     @include transform-origin($transform-origin-x, $transform-origin-y);
 }
 
-%effect-ribbon-skin-classic
+.effect-ribbon-skin-classic
 {
     color: #fff;
     text-shadow: 0 1px 0 rgba(#000, .8);
@@ -105,7 +105,33 @@
     }
 }
 
-//%effect-ribbon-skin-github
-//{
-//
-//}
+.effect-ribbon-skin-blue
+{
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(#000, .8);
+
+    border: .1em solid #151a63;
+    background: rgb(60,59,199); //fallback
+    @include background(linear-gradient(rgb(60,59,199),rgb(31,32,184)));
+    box-shadow: 0 .2em .6em rgba(#000, .6);
+
+    // light before(below) dark
+    &:before
+    {
+        border: 1px dashed #5050da;
+        margin-top: 1px;
+    }
+    &:after
+    {
+        border: 1px dashed #151a63;
+    }
+
+    &:before,
+    &:after
+    {
+        @include pseudo-element(100%, 86%);
+        top: 7%;
+        border-left: 0;
+        border-right: 0;
+    }
+}
